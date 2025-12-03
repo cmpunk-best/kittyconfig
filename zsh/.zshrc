@@ -126,12 +126,14 @@ alias .="cd .."
 alias add="sudo pacman -S"
 alias upgrade="sudo pacman -Syu"
 alias remove="sudo pacman -Rcns"
+alias delete="yay -Rns"
 alias weather='f() { curl -s "wttr.in/$1?0"; }; f'
 alias ta='f(){tmux a -t $1;};f'
 alias ts='f(){tmux new -s $1;};f'
 alias vol='f(){wpctl set-volume 56 $1;};f'
 alias version='f(){pacman -Qi $1 | grep Version;};f'
 alias printer_issue='hp-setup'
+alias cups='f(){cancel -a HP_LaserJet_P1007_$1 && sudo systemctl restart cups;};f'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 #typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
@@ -161,3 +163,4 @@ function setaudio() {
         echo "Usage: setaudio {lap|mon}"
     fi
 }
+

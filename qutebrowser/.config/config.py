@@ -13,7 +13,24 @@ config.bind(',q', 'open javascript:document.getElementById("movie_player")?.setP
 
 config.bind(';i', 'hint images download')
 config.bind(';u', 'hint images yank')
-c.messages.timeout = 500
+
+#time jumping for video 
+
+config.bind(',t', 'jseval (function(){ \
+    const input = prompt("Jump to time (mm:ss or seconds):"); \
+    if(input){ \
+        let secs = 0; \
+        if(input.includes(":")){ \
+            const parts = input.split(":").map(Number); \
+            secs = parts[0]*60 + parts[1]; \
+        } else { \
+            secs = Number(input); \
+        } \
+        const vid = document.querySelector("video"); \
+        if(vid && secs <= vid.duration) vid.currentTime = secs; \
+    } \
+})()')
+
 
 # Force-render all web contents using a dark theme.
 c.colors.webpage.darkmode.enabled = True
@@ -29,8 +46,10 @@ c.colors.webpage.darkmode.enabled = True
 c.url.searchengines = {
     'DEFAULT': 'https://duckduckgo.com/?q={}',
     'g':       'https://www.google.com/search?q={}',
-    'yt':      'https://www.youtube.com/results?search_query={}',
+    'yt':     'https://www.youtube.com/results?search_query={}&disable_polymer=1' ,
 }
+
+c.content.user_stylesheets = ["~/.config/qutebrowser/youtube.css"]
 
 # --- Bind ,s to open a search prompt using the default search engine (DuckDuckGo) ---
 config.bind(',s', 'cmd-set-text -s :open ')

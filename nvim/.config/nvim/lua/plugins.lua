@@ -59,6 +59,13 @@ return {
       end
     },
     {
+      "nvzone/timerly",
+      dependencies = "nvzone/volt",
+      cmd = "TimerlyToggle",
+      opts = {},
+    }
+    ,
+    {
       'windwp/nvim-autopairs',
       event = "InsertEnter",
       config = true
